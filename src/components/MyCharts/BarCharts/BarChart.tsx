@@ -125,7 +125,7 @@ const MyBarChart: React.FC<IProps> = props => {
       option={options}
       lazyUpdate={true}
       echarts={echarts}
-      style={{ height, width: '100%' }}
+      style={{ height:'5rem', width: '100%' }}
     />
   )
 }

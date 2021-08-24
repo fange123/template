@@ -13,6 +13,13 @@ export default [
     icon: '',
     children: [],
   },
+  {
+    title: 'screen',
+    path: '/screen',
+    key: 'screen',
+    icon: '',
+    children: [],
+  },
   // {
   //   title: '列表页',
   //   link: '/list',
