@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 
 import { connect, Dispatch } from 'umi';
-import { LoginModelState, Loading } from '@/models/connect';
+import { ILoginModelState, Loading } from '@/models/connect';
 
 import { SubmitValProps } from '../../index';
 
@@ -17,7 +17,7 @@ const formItemLayout = {
 
 interface LoginFormProps {
   dispatch: Dispatch;
-  login: LoginModelState;
+  login: ILoginModelState;
   loading: boolean;
 }
 
@@ -110,7 +110,7 @@ const LoginForm: FC<LoginFormProps & ParentProps> = ({
 };
 
 export default connect(
-  ({ login, loading }: { login: LoginModelState; loading: Loading }) => ({
+  ({ login, loading }: { login: ILoginModelState; loading: Loading }) => ({
     login,
     loading: loading.models.login,
   }),

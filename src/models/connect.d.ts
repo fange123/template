@@ -1,10 +1,10 @@
-import { GlobalModelState } from './global';
-import { LoginModelState } from './login';
+import { IGlobalModelState } from './global';
+import { ILoginModelState } from './login';
 import { IHomeState } from './home';
 import { ConnectProps, Dispatch, Loading } from 'umi';
 import { match } from 'react-router-dom';
 
-export { GlobalModelState, LoginModelState, IHomeState };
+export { IGlobalModelState, ILoginModelState, IHomeState };
 
 // 改写 umi 中 Loading 的类型定义，使提示更智能。
 interface ILoading extends Loading {
@@ -14,8 +14,8 @@ interface ILoading extends Loading {
   models: Record<keyof IAllStates, boolean>;
 }
 interface IAllStates {
-  global: GlobalModelState;
-  login: LoginModelState;
+  global: IGlobalModelState;
+  login: ILoginModelState;
   home: IHomeState;
 }
 
@@ -26,14 +26,14 @@ export interface IConnectState extends IAllStates {
 export interface Route {
   routes?: Route[];
 }
-export interface MenusDate {
+export interface IMenusDate {
   title: string;
   path: string;
   key: string;
   icon: string;
   children: any;
 }
-export interface LoginUserInfoState {
+export interface ILoginUserInfoState {
   id: string;
   name: string;
   role?: string;

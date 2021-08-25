@@ -2,25 +2,25 @@ import { Effect, Reducer, history } from 'umi';
 import { message } from 'antd';
 import { queryLogin, logout } from '@/services/login';
 
-import { IConnectState, LoginUserInfoState } from './connect.d';
+import { IConnectState, ILoginUserInfoState } from './connect.d';
 
-export interface LoginModelState {
-  userInfo: LoginUserInfoState;
+export interface ILoginModelState {
+  userInfo: ILoginUserInfoState;
   isError: boolean;
 }
 
 export interface LoginModelType {
   namespace: 'login';
-  state: LoginModelState;
+  state: ILoginModelState;
   effects: {
     getUserInfo: Effect;
     queryLogin: Effect;
     logout: Effect;
   };
   reducers: {
-    save: Reducer<LoginModelState>;
+    save: Reducer<ILoginModelState>;
     // 启用 immer 之后
-    // save: ImmerReducer<LoginModelState>;
+    // save: ImmerReducer<ILoginModelState>;
   };
 }
 

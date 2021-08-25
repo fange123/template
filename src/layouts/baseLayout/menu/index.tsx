@@ -1,21 +1,22 @@
 import React, { FC } from 'react';
-import { Link, connect, useLocation, Loading } from 'umi';
+import { Link, connect, useLocation } from 'umi';
 import { Menu } from 'antd';
-import { GlobalModelState } from '@/models/connect';
+import {
+  IGlobalModelState,
+  IConnectProps,
+  IConnectState,
+} from '@/models/connect';
 import { queryKeysByPath } from '@/utils/utils';
 
 const { SubMenu, Item } = Menu;
 
-export interface BasicLayoutProps {
-  global: GlobalModelState;
-  loading: boolean;
-}
+interface IProps extends IConnectProps, IGlobalModelState {}
 
-const MenuContent: FC<BasicLayoutProps> = ({ global }) => {
-  const { menusData } = global;
+const MenuContent: FC<IProps> = props => {
+  const { menusData } = props;
   const location = useLocation();
 
-  function renderMenu(data: any = []) {
+  const renderMenu = (data: any = []) => {
     const rows = Array.isArray(data) ? data : [];
     return rows.map(row => {
       if (row === undefined) return false;
@@ -37,7 +38,7 @@ const MenuContent: FC<BasicLayoutProps> = ({ global }) => {
         </Item>
       );
     });
-  }
+  };
 
   const { openKey, selectKey } = queryKeysByPath(location.pathname);
 
@@ -54,9 +55,6 @@ const MenuContent: FC<BasicLayoutProps> = ({ global }) => {
   );
 };
 
-export default connect(
-  ({ global, loading }: { global: GlobalModelState; loading: Loading }) => ({
-    global,
-    loading: loading.models.index,
-  }),
-)(MenuContent);
+export default connect(({ global }: IConnectState) => ({
+  ...global,
+}))(MenuContent);

@@ -1,30 +1,26 @@
 import { Effect, Reducer, Subscription } from 'umi';
 import { queryUserInfo } from '@/services/login';
 import menusSource from '../../config/menu.config';
-import { MenusDate, LoginUserInfoState } from './connect.d';
+import { IMenusDate, ILoginUserInfoState } from './connect.d';
 
-export interface GlobalModelState {
+export interface IGlobalModelState {
   name: string;
-  menusData: MenusDate[];
-  userInfo: LoginUserInfoState;
+  menusData: IMenusDate[];
+  userInfo: ILoginUserInfoState;
 }
 
 export interface GlobalModelType {
-  namespace: 'global';
-  state: GlobalModelState;
+  state: IGlobalModelState;
   effects: {
     queryUserInfo: Effect;
   };
   reducers: {
-    save: Reducer<GlobalModelState>;
-    // 启用 immer 之后
-    // save: ImmerReducer<GlobalModelState>;
+    save: Reducer<IGlobalModelState>;
   };
   subscriptions: { setup: Subscription };
 }
 
 const GlobalModel: GlobalModelType = {
-  namespace: 'global',
   state: {
     name: '',
     menusData: menusSource,
@@ -54,10 +50,6 @@ const GlobalModel: GlobalModelType = {
         ...action.payload,
       };
     },
-    // 启用 immer 之后
-    // save(state, action) {
-    //   state.name = action.payload;
-    // },
   },
   subscriptions: {
     setup({ dispatch, history }) {

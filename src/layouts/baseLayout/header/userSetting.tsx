@@ -1,29 +1,29 @@
 import React, { FC } from 'react';
-import { connect, Dispatch } from 'umi';
-import { ClickParam } from 'antd/es/menu';
+import { connect } from 'umi';
 import { Dropdown, Menu } from 'antd';
 import {
   SettingOutlined,
   LogoutOutlined,
   DownOutlined,
 } from '@ant-design/icons';
-import { LoginModelState, GlobalModelState } from '@/models/connect';
+import {
+  IGlobalModelState,
+  IConnectState,
+  IConnectProps,
+} from '@/models/connect';
 
-export interface HeaderLayoutProps {
-  dispatch: Dispatch;
-  global: GlobalModelState;
-}
+interface IProps extends IConnectProps, IGlobalModelState {}
 
-const UserSettingLayout: FC<HeaderLayoutProps> = ({ global, dispatch }) => {
-  function handleSubmit(event: ClickParam) {
+const UserSettingLayout: FC<IProps> = props => {
+  const { userInfo, dispatch } = props;
+  const handleSubmit = (event: any) => {
     const { key } = event;
     if (key === 'logout') {
       dispatch({
         type: 'login/logout',
       });
     }
-  }
-  const { userInfo } = global;
+  };
 
   const menu = (
     <Menu onClick={handleSubmit}>
@@ -54,12 +54,7 @@ const UserSettingLayout: FC<HeaderLayoutProps> = ({ global, dispatch }) => {
   );
 };
 
-export default connect(
-  ({
-    login,
-    global,
-  }: {
-    login: LoginModelState;
-    global: GlobalModelState;
-  }) => ({ login, global }),
-)(UserSettingLayout);
+export default connect(({ login, global }: IConnectState) => ({
+  ...login,
+  ...global,
+}))(UserSettingLayout);

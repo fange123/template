@@ -14,7 +14,7 @@ export default (props: any) => {
       </Header>
       <Layout style={{ padding: 0 }}>
         <Sider width={200} style={{ background: '#fff' }}>
-          <MenuContent />
+          <MenuContent {...props} />
         </Sider>
         <Content className={styles.content}>{props.children}</Content>
       </Layout>
