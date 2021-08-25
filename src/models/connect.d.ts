@@ -1,27 +1,25 @@
 import { GlobalModelState } from './global';
 import { LoginModelState } from './login';
-import { QueryTableState } from './queryTable';
-import {  IHomeState } from './home';
+import { IHomeState } from './home';
 import { ConnectProps, Dispatch, Loading } from 'umi';
-import { match } from 'react-router-dom'
+import { match } from 'react-router-dom';
 
-export { GlobalModelState, LoginModelState, QueryTableState,IHomeState };
+export { GlobalModelState, LoginModelState, IHomeState };
 
 // 改写 umi 中 Loading 的类型定义，使提示更智能。
 interface ILoading extends Loading {
   effects: {
-    [key: string]: boolean
-  }
-  models: Record<keyof IAllStates, boolean>
+    [key: string]: boolean;
+  };
+  models: Record<keyof IAllStates, boolean>;
 }
 interface IAllStates {
-   global: GlobalModelState;
+  global: GlobalModelState;
   login: LoginModelState;
-  home: IHomeState
+  home: IHomeState;
 }
 
-export interface IConnectState extends IAllStates{
-
+export interface IConnectState extends IAllStates {
   loading: ILoading;
 }
 
@@ -52,7 +50,7 @@ export interface LoginUserInfoState {
 export interface IConnectProps<TP extends { [TK in keyof TP]?: string } = {}>
   extends ConnectProps<TP>,
     IAllStates {
-  dispatch: Dispatch
-  loading: boolean,
-  match?: match<TP>
+  dispatch: Dispatch;
+  loading: boolean;
+  match?: match<TP>;
 }
