@@ -20,6 +20,13 @@ export default [
     icon: '',
     children: [],
   },
+  {
+    title: 'test',
+    path: '/test',
+    key: 'test',
+    icon: '',
+    children: [],
+  },
   // {
   //   title: '列表页',
   //   link: '/list',
